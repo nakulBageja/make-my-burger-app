@@ -1,12 +1,11 @@
 //this function returns jsx for the ingredient selected by user
 
 import React from "react";
-import classes from "./burgerIngredient.module.css";
+import classes from "./BurgerIngredient.module.css";
 import propTypes from "prop-types";
 
 const burgerIngredient = (props) => {
   let ingredient = null;
-
   switch (props.type) {
     case "bread-bottom":
       ingredient = <div className={classes.BreadBottom}></div>;
@@ -14,8 +13,8 @@ const burgerIngredient = (props) => {
     case "bread-top":
       ingredient = (
         <div className={classes.BreadTop}>
-          <div className={classes.Seeds1}></div>;
-          <div className={classes.Seeds2}></div>;
+          <div className={classes.Seeds1}></div>
+          <div className={classes.Seeds2}></div>
         </div>
       );
       break;
@@ -38,7 +37,7 @@ const burgerIngredient = (props) => {
 };
 
 burgerIngredient.propTypes = {
-  types: propTypes.string.isRequired,
+  type: propTypes.string.isRequired,
 };
 
 export default burgerIngredient;

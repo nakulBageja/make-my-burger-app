@@ -1,3 +1,5 @@
+// Layout component
+
 import React from "react";
 import Auxillary from "../../hoc/Auxillary";
 import LayoutStyles from "./Layout.module.css";
