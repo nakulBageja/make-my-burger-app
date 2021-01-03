@@ -14,6 +14,9 @@ const CONTROLS = [
 export const BurgerControlsPanel = (props) => {
   return (
     <div className={styles.BuildControls}>
+      <p>
+        Current Price: <strong>₹{props.price}</strong>
+      </p>
       {CONTROLS.map((ctrl) => (
         <BurgerControl
           key={ctrl.label}
@@ -23,6 +26,13 @@ export const BurgerControlsPanel = (props) => {
           disable={props.disabled[ctrl.type]}
         />
       ))}
+      <button
+        className={styles.OrderButton}
+        disabled={!props.purchasable}
+        onClick={props.ordered}
+      >
+        ORDER NOW
+      </button>
     </div>
   );
 };

@@ -4,7 +4,10 @@ import React, { Component } from "react";
 import { Burger } from "../../components/Burger/Burger";
 import { BurgerControlsPanel } from "../../components/BurgerController/BurgerControlsPanel/BurgerControlsPanel";
 import Auxillary from "../../hoc/Auxillary";
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
+//Price for each ingredient
 const PRICE = {
   meat: 200,
   cheese: 50,
@@ -21,6 +24,7 @@ class BurgerBuilder extends Component {
       bacon: 0,
     },
     totalPrice: 0,
+    purchasing: false,
   };
 
   //Function to increase count of ingredients and price
@@ -61,7 +65,19 @@ class BurgerBuilder extends Component {
       totalPrice: updatedTotal,
     });
   };
+
+  //Function is invoked when order now button is clicked
+  purchasingHandlerShow = () => {
+    this.setState({ purchasing: true });
+  };
+  //Function is invoked when backdrop is clicked
+  purchasingHandlerRemove = () => {
+    this.setState({ purchasing: false });
+  };
+
   render() {
+    const purchasable = this.state.totalPrice > 0; //This property is used to make the order now button active if true
+
     const disabled = { ...this.state.ingredients }; //copying the state of ingredients object
     //here we are checking if the quantity of any ingredient is zero.
     //If yes then we will disable the LESS button of the panel
@@ -70,11 +86,21 @@ class BurgerBuilder extends Component {
     }
     return (
       <Auxillary>
+        <Modal
+          show={this.state.purchasing}
+          clicked={this.purchasingHandlerRemove}
+        >
+          <OrderSummary ingredients={this.state.ingredients} />
+        </Modal>
+
         <Burger ingredients={this.state.ingredients} />
         <BurgerControlsPanel
           addIngredients={this.addIngredientsHandler}
           removeIngredients={this.removeIngredientsHandler}
           disabled={disabled}
+          price={this.state.totalPrice}
+          purchasable={purchasable}
+          ordered={this.purchasingHandlerShow}
         />
       </Auxillary>
     );
