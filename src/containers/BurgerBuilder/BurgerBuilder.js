@@ -47,10 +47,7 @@ class BurgerBuilder extends Component {
   //Function to remove count of ingredients and price
   removeIngredientsHandler = (type) => {
     const oldCount = this.state.ingredients[type];
-    //if there is not ingredient of this type then return
-    if (oldCount <= 0) {
-      return;
-    }
+
     const updatedCount = oldCount - 1;
     const updatedIngredients = {
       ...this.state.ingredients,
@@ -74,6 +71,10 @@ class BurgerBuilder extends Component {
   purchasingHandlerRemove = () => {
     this.setState({ purchasing: false });
   };
+  //Function is invoked when order is continued
+  continuePurchaseHandler = () => {
+    alert("You continued");
+  };
 
   render() {
     const purchasable = this.state.totalPrice > 0; //This property is used to make the order now button active if true
@@ -90,7 +91,12 @@ class BurgerBuilder extends Component {
           show={this.state.purchasing}
           clicked={this.purchasingHandlerRemove}
         >
-          <OrderSummary ingredients={this.state.ingredients} />
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            cancel={this.purchasingHandlerRemove}
+            continue={this.continuePurchaseHandler}
+            price={this.state.totalPrice}
+          />
         </Modal>
 
         <Burger ingredients={this.state.ingredients} />

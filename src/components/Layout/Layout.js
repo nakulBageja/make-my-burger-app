@@ -3,9 +3,11 @@
 import React from "react";
 import Auxillary from "../../hoc/Auxillary";
 import LayoutStyles from "./Layout.module.css";
+import Toolbar from "../Navigation/Toolbar/Toolbar";
+
 const Layout = (props) => (
   <Auxillary>
-    <div>Toolbar, side bar, back drop</div>
+    <Toolbar />
     <main className={LayoutStyles.Content}>{props.children}</main>
   </Auxillary>
 );
