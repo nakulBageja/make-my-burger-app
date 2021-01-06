@@ -1,26 +1,29 @@
 // Layout component
 
 import React, { Component } from "react";
-import Auxillary from "../../hoc/Auxillary";
+import Auxillary from "../Auxillary/Auxillary";
 import LayoutStyles from "./Layout.module.css";
-import Toolbar from "../Navigation/Toolbar/Toolbar";
-import SideDrawer from "../Navigation/SideDrawer/SideDrawer";
+import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
+import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 class Layout extends Component {
   state = {
-    showSideDrawer: true,
+    showSideDrawer: false,
   };
 
   closeSideDrawer = () => {
-    console.log(this.state.showSideDrawer);
     this.setState({
       showSideDrawer: false,
     });
-    console.log(this.state.showSideDrawer);
+  };
+  openSideDrawer = () => {
+    this.setState({
+      showSideDrawer: true,
+    });
   };
   render() {
     return (
       <Auxillary>
-        <Toolbar />
+        <Toolbar toggle={this.openSideDrawer} />
         <SideDrawer
           open={this.state.showSideDrawer}
           close={this.closeSideDrawer}

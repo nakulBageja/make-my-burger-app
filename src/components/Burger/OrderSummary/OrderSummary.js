@@ -1,7 +1,7 @@
 //This component displays the order summary by taking in the ingredients as props
 
 import React from "react";
-import Auxillary from "../../../hoc/Auxillary";
+import Auxillary from "../../../hoc/Auxillary/Auxillary";
 import Button from "../../UI/Button/Button";
 const OrderSummary = (props) => {
   const ingredients = Object.keys(props.ingredients).map((igKey) => {

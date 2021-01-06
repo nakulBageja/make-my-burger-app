@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { Burger } from "../../components/Burger/Burger";
 import { BurgerControlsPanel } from "../../components/BurgerController/BurgerControlsPanel/BurgerControlsPanel";
-import Auxillary from "../../hoc/Auxillary";
+import Auxillary from "../../hoc/Auxillary/Auxillary";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 

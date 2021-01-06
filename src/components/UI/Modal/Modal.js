@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./Modal.module.css";
 import Backdrop from "../Backdrop/Backdrop";
-import Auxillary from "../../../hoc/Auxillary";
+import Auxillary from "../../../hoc/Auxillary/Auxillary";
 const Modal = (props) => {
   return (
     <Auxillary>
