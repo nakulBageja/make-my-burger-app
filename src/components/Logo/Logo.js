@@ -1,3 +1,5 @@
+//A reusable component containing the logo
+
 import React from "react";
 import styles from "./Logo.module.css";
 import logoImg from "../../assets/images/burger-logo.png";

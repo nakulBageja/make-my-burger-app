@@ -1,3 +1,5 @@
+//Component to hold all the navigations
+
 import React from "react";
 import styles from "./NavigationItems.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
