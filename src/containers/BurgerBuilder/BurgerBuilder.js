@@ -6,7 +6,8 @@ import { BurgerControlsPanel } from "../../components/BurgerController/BurgerCon
 import Auxillary from "../../hoc/Auxillary/Auxillary";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
-
+import axios from "../../axiosInstance";
+import Spinner from "../../components/UI/Spinner/Spinner";
 //Price for each ingredient
 const PRICE = {
   meat: 200,
@@ -25,6 +26,7 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 0,
     purchasing: false,
+    loading: false,
   };
 
   //Function to increase count of ingredients and price
@@ -73,10 +75,39 @@ class BurgerBuilder extends Component {
   };
   //Function is invoked when order is continued
   continuePurchaseHandler = () => {
-    alert("You continued");
+    this.setState({ loading: true });
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: { name: "Nakul" },
+    };
+
+    axios
+      .post("/Orders.json", order)
+      .then((response) => {
+        this.setState({ loading: true, purchasing: false });
+        console.log(response);
+      })
+      .catch((error) => {
+        this.setState({ loading: true, purchasing: false });
+        console.log(error);
+      });
   };
 
   render() {
+    let orderSummary = (
+      <OrderSummary
+        ingredients={this.state.ingredients}
+        cancel={this.purchasingHandlerRemove}
+        continue={this.continuePurchaseHandler}
+        price={this.state.totalPrice}
+      />
+    );
+
+    if (this.state.loading) {
+      orderSummary = <Spinner />;
+    }
+
     const purchasable = this.state.totalPrice > 0; //This property is used to make the order now button active if true
 
     const disabled = { ...this.state.ingredients }; //copying the state of ingredients object
@@ -91,14 +122,8 @@ class BurgerBuilder extends Component {
           show={this.state.purchasing}
           clicked={this.purchasingHandlerRemove}
         >
-          <OrderSummary
-            ingredients={this.state.ingredients}
-            cancel={this.purchasingHandlerRemove}
-            continue={this.continuePurchaseHandler}
-            price={this.state.totalPrice}
-          />
+          {orderSummary}
         </Modal>
-
         <Burger ingredients={this.state.ingredients} />
         <BurgerControlsPanel
           addIngredients={this.addIngredientsHandler}
